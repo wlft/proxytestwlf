@@ -1,5 +1,4 @@
 <?php
-// gpt code that might work idk
 // Get the URL to proxy from the query string
 $proxy_url = $_GET['url'];
 
@@ -33,8 +32,16 @@ if (curl_errno($ch)) {
 // Close the cURL session
 curl_close($ch);
 
+// Attempt to decode the JSON response
+$json_data = json_decode($response, true);
+
+// Check if JSON decoding was successful
+if ($json_data === null) {
+    die('Error: Unable to parse JSON data from the endpoint.');
+}
+
 // Set the appropriate Content-Type header for JSON
 header('Content-Type: application/json');
 
 // Output the JSON response to the client
-echo json_encode($response);
+echo json_encode($json_data);
