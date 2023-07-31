@@ -33,5 +33,8 @@ if (curl_errno($ch)) {
 // Close the cURL session
 curl_close($ch);
 
-// Output the response to the client
+// Set the appropriate Content-Type header for JSON
+header('Content-Type: application/json');
+
+// Output the JSON response to the client
 echo $response;
