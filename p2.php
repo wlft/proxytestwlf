@@ -1,39 +1,36 @@
-<?php
-// Get the URL to proxy from the query string
-$proxy_url = $_GET['https://api.wolfite.net/404-quotes.json'];
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON Proxy Example</title>
+</head>
+<body>
+    <h1>JSON Proxy Example</h1>
+    <div id="data-container"></div>
 
-if (empty($proxy_url)) {
-    die('Error: Proxy URL not specified.');
-}
+    <script type="text/php">
 
-// Initialize a cURL session
-$ch = curl_init();
+        // AJAX request to the PHP proxy script
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'p2.php?url=https://api.wolfite.net/404-quotes.json', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
 
-// Set the cURL options
-curl_setopt($ch, CURLOPT_URL, $proxy_url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
-curl_setopt($ch, CURLOPT_HEADER, false);
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // Successful response, process the JSON data
+                    var jsonData = JSON.parse(xhr.responseText);
 
-// Add any additional headers you want to forward to the remote server
-// For example, you can forward the client's User-Agent header to make the proxy look like a regular browser request.
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36',
-));
+                    // Display the JSON data on the web page
+                    var dataContainer = document.getElementById('data-container');
+                    dataContainer.textContent = JSON.stringify(jsonData, null, 2); // Display formatted JSON
+                } else {
+                    // Handle errors if necessary
+                    console.error('Error fetching data: ' + xhr.status);
+                }
+            }
+        };
 
-// Execute the cURL request
-$response = curl_exec($ch);
-
-// Check for cURL errors
-if (curl_errno($ch)) {
-    die('Error: ' . curl_error($ch));
-}
-
-// Close the cURL session
-curl_close($ch);
-
-// Set the appropriate Content-Type header for JSON
-header('Content-Type: application/json');
-
-// Output the response to the client
-echo $response;
+        xhr.send();
+    </script>
+</body>
+</html>
