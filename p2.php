@@ -1,5 +1,5 @@
 <?php
-// bad gpt code
+// gpt code that might work idk
 // Get the URL to proxy from the query string
 $proxy_url = $_GET['url'];
 
@@ -37,4 +37,4 @@ curl_close($ch);
 header('Content-Type: application/json');
 
 // Output the JSON response to the client
-echo $response;
+echo json_encode($response);
