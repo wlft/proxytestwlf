@@ -7,7 +7,7 @@
     <h1>JSON Proxy Example</h1>
     <div id="data-container"></div>
 
-    <script type="text/php">
+    <script>
 
         // AJAX request to the PHP proxy script
         var xhr = new XMLHttpRequest();
