@@ -10,13 +10,12 @@
     <script>
         // AJAX request to the PHP proxy script
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', 'p2.php?url=https://api.wolfite.net/404-quotes.json', true);
-        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.open('GET', 'proxy.php?url=https://www.example.com/api/data', true);
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE) {
                 if (xhr.status === 200) {
-                    // Successful response, process the JSON data
+                    // Successful response, parse the JSON data
                     var jsonData = JSON.parse(xhr.responseText);
 
                     // Display the JSON data on the web page
