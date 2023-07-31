@@ -1,7 +1,6 @@
 <?php
-// bad gpt code
 // Get the URL to proxy from the query string
-$proxy_url = $_GET['url'];
+$proxy_url = $_GET['https://api.wolfite.net/404-quotes.json'];
 
 if (empty($proxy_url)) {
     die('Error: Proxy URL not specified.');
@@ -32,6 +31,9 @@ if (curl_errno($ch)) {
 
 // Close the cURL session
 curl_close($ch);
+
+// Set the appropriate Content-Type header for JSON
+header('Content-Type: application/json');
 
 // Output the response to the client
 echo $response;
