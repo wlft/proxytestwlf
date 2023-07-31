@@ -1,7 +1,7 @@
 <?php
 // bad gpt code
 // Get the URL to proxy from the query string
-$proxy_url = $_GET['https://api.wolfite.net/404-quotes.json'];
+$proxy_url = $_GET['url'];
 
 if (empty($proxy_url)) {
     die('Error: Proxy URL not specified.');
